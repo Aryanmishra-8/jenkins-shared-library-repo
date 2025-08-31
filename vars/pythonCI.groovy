@@ -1,4 +1,3 @@
-
 def setup(Map config = [:]) {
 
     stage('Checkout') {
@@ -19,7 +18,9 @@ def setup(Map config = [:]) {
         echo "Compiling Python code..."
         sh '''
             mkdir -p reports
-            python -m py_compile $(find . -name "*.py") > reports/code_compile_report.txt 2>&1
+            set -e
+            # Compile all Python files, save output to report
+            python -m py_compile $(find . -name "*.py") 2>&1 | tee reports/code_compile_report.txt
         '''
         archiveArtifacts artifacts: 'reports/code_compile_report.txt', followSymlinks: false
     }
