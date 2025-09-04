@@ -55,7 +55,7 @@ def call(Map config = [:]) {
                 }
             }
             always {
-                echo "Pipeline finished. Check status above."
+                echo "Pipeline finished. "
             }
         }
     }
